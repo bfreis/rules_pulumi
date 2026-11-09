@@ -1,0 +1,97 @@
+load("@rules_go//go:def.bzl", "go_binary")
+load("@rules_pulumi//pulumi:defs.bzl", "pulumi_project", "pulumi_stack")
+
+# A sample outputs file, loaded by //:loaded_outputs and compared with the
+# generated one by //:test_outputs.
+exports_files(
+    ["fixture_outputs.bzl"],
+    visibility = ["//:__pkg__"],
+)
+
+go_binary(
+    name = "program",
+    srcs = ["main.go"],
+    visibility = [
+        "//scd:__pkg__",
+        "//yaml_shapes:__pkg__",
+    ],
+    data = ["testdata/hello.txt"],
+    deps = [
+        "@com_github_pulumi_pulumi_random_sdk_v4//go/random",
+        "@com_github_pulumi_pulumi_sdk_v3//go/pulumi",
+        "@com_github_pulumi_pulumi_sdk_v3//go/pulumi/config",
+    ],
+)
+
+pulumi_project(
+    name = "project",
+    program = ":program",
+    providers = ["@pulumi_provider_random"],
+)
+
+# The same program with no provider pinned, for the test that Pulumi will not
+# fetch one on its own.
+pulumi_project(
+    name = "project_no_providers",
+    program = ":program",
+)
+
+pulumi_stack(
+    name = "dev",
+    env = {
+        "PROBE_CMD": "from-env",
+        "PROBE_ENV": "from-env",
+        "PROBE_SHELL_ENV": "from-env",
+    },
+    env_cmds = [
+        "echo PROBE_CMD=from-cmd-1; echo PROBE_CMDS=from-cmd-1",
+        "printf '%s\\n' '# comments and blank lines are skipped' '' PROBE_CMDS=from-cmd-2 PROBE_SHELL_CMD=from-cmd",
+    ],
+    outputs_file = "dev_outputs.bzl",
+    project = ":project",
+    stack = "dev",
+    visibility = ["//:__pkg__"],
+)
+
+pulumi_stack(
+    name = "dev_no_providers",
+    project = ":project_no_providers",
+    stack = "organization/integration/noprov",
+    visibility = ["//:__pkg__"],
+)
+
+pulumi_stack(
+    name = "dev_bad_env_cmd",
+    # The printed line is assembled at run time, so the test can tell whether
+    # the launcher echoed it (it must not) apart from echoing the command.
+    env_cmds = ["printf '%s-%s\\n' SECRET LOOKING"],
+    project = ":project",
+    stack = "dev",
+    visibility = ["//:__pkg__"],
+)
+
+pulumi_stack(
+    name = "dev_reserved_env_cmd",
+    env_cmds = ["echo _work=/elsewhere"],
+    project = ":project",
+    stack = "dev",
+    visibility = ["//:__pkg__"],
+)
+
+# A backend in the BUILD file is fixed: the shell cannot point the stack at
+# another one.
+pulumi_stack(
+    name = "dev_fixed_backend",
+    backend = "file:///nonexistent-fixed-backend",
+    project = ":project",
+    stack = "dev",
+    visibility = ["//:__pkg__"],
+)
+
+pulumi_stack(
+    name = "dev_failing_env_cmd",
+    env_cmds = ["echo PARTIAL=1; exit 3"],
+    project = ":project",
+    stack = "dev",
+    visibility = ["//:__pkg__"],
+)

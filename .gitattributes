@@ -1,0 +1,2 @@
+# A test sample whose CRLF line endings are the point: store it byte for byte.
+test/yaml_shapes/Pulumi.yaml -text

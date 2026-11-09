@@ -1,0 +1,2 @@
+# Bazel convenience symlinks, at any depth (nested test modules have their own).
+bazel-*

@@ -1,0 +1,16 @@
+load("@rules_pulumi//pulumi:defs.bzl", "pulumi_project")
+
+# A project file with CRLF line endings and a `name:` nested below runtime's
+# first level, which is not the runtime's name.
+pulumi_project(
+    name = "project",
+    program = "//program",
+    visibility = ["//:__pkg__"],
+)
+
+filegroup(
+    name = "stack_config_dir",
+    srcs = [":project"],
+    output_group = "stack_config_dir",
+    visibility = ["//:__pkg__"],
+)

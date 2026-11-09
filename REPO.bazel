@@ -1,0 +1,3 @@
+# Directories whose names start with a dot hold tooling and local state
+# (.git, .github, .bcr, editor settings), never packages.
+ignore_directories(["**/.*"])

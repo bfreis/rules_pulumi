@@ -1,0 +1,10 @@
+load("@rules_pulumi//pulumi:defs.bzl", "pulumi_stack_reference")
+
+# The outputs of //program:dev's stack, read by name alone, the way another
+# repository would read them.
+pulumi_stack_reference(
+    name = "integration_dev",
+    outputs_file = "dev_outputs.bzl",
+    stack = "organization/integration/dev",
+    visibility = ["//:__pkg__"],
+)

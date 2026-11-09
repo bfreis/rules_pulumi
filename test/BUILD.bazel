@@ -1,0 +1,163 @@
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load("//:write_text.bzl", "write_text")
+load("//program:fixture_outputs.bzl", "OUTPUTS", "SECRET_OUTPUTS")
+
+# Each test runs a stack launcher the way bazel run would, against a workspace
+# and a file:// backend inside its own temporary directory.
+
+_GO = "@go_sdk//:bin/go"
+
+sh_test(
+    name = "test_up",
+    srcs = ["test_up.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev",
+        _GO,
+    ],
+    env = {
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "STACK": "$(rootpath //program:dev)",
+    },
+)
+
+sh_test(
+    name = "test_no_providers",
+    srcs = ["test_no_providers.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev_no_providers",
+        "@pulumi_provider_random",
+        _GO,
+    ],
+    env = {
+        "CACHED_PLUGIN": "$(rootpath @pulumi_provider_random)",
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "STACK": "$(rootpath //program:dev_no_providers)",
+    },
+)
+
+sh_test(
+    name = "test_requires_bazel_run",
+    srcs = ["test_requires_bazel_run.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev",
+        _GO,
+    ],
+    env = {
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "STACK": "$(rootpath //program:dev)",
+    },
+)
+
+sh_test(
+    name = "test_env_cmds_errors",
+    srcs = ["test_env_cmds_errors.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev_bad_env_cmd",
+        "//program:dev_failing_env_cmd",
+        "//program:dev_reserved_env_cmd",
+        _GO,
+    ],
+    env = {
+        "BAD_LINE_STACK": "$(rootpath //program:dev_bad_env_cmd)",
+        "FAILING_STACK": "$(rootpath //program:dev_failing_env_cmd)",
+        "RESERVED_STACK": "$(rootpath //program:dev_reserved_env_cmd)",
+        "GO_BIN": "$(rootpath %s)" % _GO,
+    },
+)
+
+sh_test(
+    name = "test_outputs",
+    srcs = ["test_outputs.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev",
+        "//program:dev.outputs",
+        "//program:fixture_outputs.bzl",
+        _GO,
+    ],
+    env = {
+        "FIXTURE": "$(rootpath //program:fixture_outputs.bzl)",
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "OUTPUTS": "$(rootpath //program:dev.outputs)",
+        "STACK": "$(rootpath //program:dev)",
+    },
+)
+
+# What a BUILD file sees when it loads an outputs file.
+write_text(
+    name = "loaded_outputs",
+    content = json.encode({
+        "OUTPUTS": OUTPUTS,
+        "SECRET_OUTPUTS": SECRET_OUTPUTS,
+    }),
+)
+
+sh_test(
+    name = "test_outputs_load",
+    srcs = ["test_outputs_load.sh"],
+    data = [":loaded_outputs"],
+    env = {"LOADED": "$(rootpath :loaded_outputs)"},
+)
+
+sh_test(
+    name = "test_stack_reference",
+    srcs = ["test_stack_reference.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev",
+        "//ref:integration_dev",
+        _GO,
+    ],
+    env = {
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "REF": "$(rootpath //ref:integration_dev)",
+        "STACK": "$(rootpath //program:dev)",
+    },
+)
+
+sh_test(
+    name = "test_login_and_backend",
+    srcs = ["test_login_and_backend.sh"],
+    data = [
+        "testlib.sh",
+        "//program:dev",
+        "//program:dev_fixed_backend",
+        _GO,
+    ],
+    env = {
+        "FIXED_STACK": "$(rootpath //program:dev_fixed_backend)",
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "STACK": "$(rootpath //program:dev)",
+    },
+)
+
+sh_test(
+    name = "test_stack_config_dir",
+    srcs = ["test_stack_config_dir.sh"],
+    data = [
+        "testlib.sh",
+        "//scd:dev",
+        _GO,
+    ],
+    env = {
+        "GO_BIN": "$(rootpath %s)" % _GO,
+        "STACK": "$(rootpath //scd:dev)",
+    },
+)
+
+sh_test(
+    name = "test_yaml_shapes",
+    srcs = ["test_yaml_shapes.sh"],
+    data = [
+        "//yaml_shapes:project",
+        "//yaml_shapes:stack_config_dir",
+    ],
+    env = {
+        "SCD": "$(rootpath //yaml_shapes:stack_config_dir)",
+        "TEMPLATE": "$(rootpath //yaml_shapes:project)",
+    },
+)

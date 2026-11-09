@@ -1,0 +1,15 @@
+load("@rules_pulumi//pulumi:defs.bzl", "pulumi_project", "pulumi_stack")
+
+# The test program again, with stack configuration in a subdirectory.
+pulumi_project(
+    name = "project",
+    program = "//program",
+    providers = ["@pulumi_provider_random"],
+)
+
+pulumi_stack(
+    name = "dev",
+    project = ":project",
+    stack = "dev",
+    visibility = ["//:__pkg__"],
+)

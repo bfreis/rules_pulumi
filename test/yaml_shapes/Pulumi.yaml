@@ -1,0 +1,7 @@
+name: shapes
+runtime:
+  options:
+    name: decoy
+  name: go
+stackConfigDir: "config/"
+description: CRLF line endings, a decoy name
