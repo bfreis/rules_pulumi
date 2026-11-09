@@ -20,16 +20,8 @@ Pulumi's own plugin downloads are switched off.
 
 ## Setup
 
-rules_pulumi has no release on the Bazel Central Registry yet. Until it does,
-depend on a commit of this repository from your root module:
-
 ```starlark
-bazel_dep(name = "rules_pulumi", version = "0.0.0")
-git_override(
-    module_name = "rules_pulumi",
-    remote = "https://github.com/bfreis/rules_pulumi.git",
-    commit = "...",  # a commit of the main branch
-)
+bazel_dep(name = "rules_pulumi", version = "0.1.0")
 
 pulumi = use_extension("@rules_pulumi//pulumi:extensions.bzl", "pulumi")
 pulumi.provider(name = "aws", version = "7.21.0")
@@ -301,11 +293,24 @@ already, and spares a build of `protoc`.
 - Bazel 8 or later.
 - macOS and Linux, on arm64 and x86-64. The launcher is a bash script.
 - Programs in Go, .NET or Java: the runtimes whose hosts can run a prebuilt
-  executable.
-- Pulumi 3.274.1 and earlier still need a `go` executable on `PATH` to run a
-  prebuilt Go program, though nothing compiles it
-  ([pulumi/pulumi#25585](https://github.com/pulumi/pulumi/pull/25585) lifts
-  this). `bazel run` passes the shell's `PATH` through.
+  executable. Only Go is tested so far.
+- Go programs need a `go` executable on `PATH`, for now. See below.
+
+### Go on `PATH`
+
+Nothing compiles the program at run time: Bazel built it. But up to Pulumi
+3.274.1, the CLI's Go language host still runs `go version` and `go list -m`
+before starting a prebuilt program, to look for plugins, and fails when `go`
+is not on `PATH`. rules_pulumi does not use what that lookup finds: plugins
+come from the pinned providers.
+
+[pulumi/pulumi#25585](https://github.com/pulumi/pulumi/pull/25585), merged
+but not yet in a release, makes the language host skip that lookup when `go`
+is missing. Once a Pulumi release includes it, rules_pulumi will make that
+version the default, and `go` will no longer be needed.
+
+Until then, any Go 1.14 or later will do; `bazel run` passes the shell's
+`PATH` through.
 
 ## License
 

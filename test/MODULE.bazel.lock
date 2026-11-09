@@ -275,7 +275,7 @@
     "@@rules_pulumi+//pulumi:extensions.bzl%pulumi": {
       "general": {
         "bzlTransitiveDigest": "XBXYS/4mGad3U/MWo6jJtBjgxJiEvIIsyI40qEq/toc=",
-        "usagesDigest": "QI7KfNg3pHtL3V7q/3gCBj2Yhsbkx2V830nZCml7Q5U=",
+        "usagesDigest": "hPXTmPQtXKhV4eJnaCVq48kZNVyZ0EfPTQhSD/porRc=",
         "recordedInputs": [],
         "generatedRepoSpecs": {
           "pulumi_cli_darwin_arm64": {
@@ -365,10 +365,6 @@
               "platform_repo_prefix": "pulumi_provider_random_"
             }
           }
-        },
-        "moduleExtensionMetadata": {
-          "useAllRepos": "NO",
-          "reproducible": false
         }
       }
     },
@@ -888,14 +884,6 @@
           "go1.27.2.windows-arm64.zip",
           "5c4b294f23b558619ae8a4aa94d023e3bca03f52c8398bb41b9026002b0013de"
         ]
-      }
-    },
-    "@@rules_pulumi+//pulumi:extensions.bzl%pulumi": {
-      "provider/pulumi/pulumi-random/4.21.6": {
-        "darwin-arm64": "f2228a848abed33e3cdd9eb14d501a2861525cfbcc81ccefd371ae642784b456",
-        "darwin-x64": "6c352166709f3539475ce61a098b0b7f152f40f830eae21fe895fd7ab3ada191",
-        "linux-arm64": "ca8f2f5cb0a9e162be0fa559b90b3e35c9283df763e27c49ea78638b633984bd",
-        "linux-x64": "d23098a615cd8590e026ec3d36c95f00617d93b0af14164162b81cf1af808174"
       }
     }
   },

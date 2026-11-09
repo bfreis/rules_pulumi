@@ -33,8 +33,16 @@ use_repo(
 )
 
 pulumi = use_extension("@rules_pulumi//pulumi:extensions.bzl", "pulumi")
+# The digests are pinned rather than looked up, so the tests never depend on
+# GitHub's releases API, which limits unauthenticated calls.
 pulumi.provider(
     name = "random",
+    sha256s = {
+        "darwin-arm64": "f2228a848abed33e3cdd9eb14d501a2861525cfbcc81ccefd371ae642784b456",
+        "darwin-x64": "6c352166709f3539475ce61a098b0b7f152f40f830eae21fe895fd7ab3ada191",
+        "linux-arm64": "ca8f2f5cb0a9e162be0fa559b90b3e35c9283df763e27c49ea78638b633984bd",
+        "linux-x64": "d23098a615cd8590e026ec3d36c95f00617d93b0af14164162b81cf1af808174",
+    },
     version = "4.21.6",
 )
 use_repo(pulumi, "pulumi_provider_random")
