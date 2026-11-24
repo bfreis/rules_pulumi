@@ -215,6 +215,102 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
+    "@@bfreis_rules_pulumi+//pulumi:extensions.bzl%pulumi": {
+      "general": {
+        "bzlTransitiveDigest": "XBXYS/4mGad3U/MWo6jJtBjgxJiEvIIsyI40qEq/toc=",
+        "usagesDigest": "coEUBfGjEGIuk5i8Dh7SAY3cEYXK2h/cSBU8mrNY7gM=",
+        "recordedInputs": [],
+        "generatedRepoSpecs": {
+          "pulumi_cli_darwin_arm64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
+            "attributes": {
+              "version": "3.274.1",
+              "platform": "darwin-arm64",
+              "sha256": "053f2b243d09dfc2e83bacd9921f4a5d365bb8804cdc19fa09fb5a1240eb171b"
+            }
+          },
+          "pulumi_cli_darwin_x64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
+            "attributes": {
+              "version": "3.274.1",
+              "platform": "darwin-x64",
+              "sha256": "82be2e37c030737404b2ec6a5581ec76095c824c822b802a22579a95431ff376"
+            }
+          },
+          "pulumi_cli_linux_arm64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
+            "attributes": {
+              "version": "3.274.1",
+              "platform": "linux-arm64",
+              "sha256": "3deec71250f46c8f63e2b1f2078b08f5a8df4815d0e5e141420eb4e7f072f36e"
+            }
+          },
+          "pulumi_cli_linux_x64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
+            "attributes": {
+              "version": "3.274.1",
+              "platform": "linux-x64",
+              "sha256": "32ae6d09d0df51637db7a0affb3ceb7d0511093b22d477aff5f20214d0b7e471"
+            }
+          },
+          "pulumi_toolchains": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_toolchains_repository",
+            "attributes": {
+              "cli_repo_prefix": "pulumi_cli_"
+            }
+          },
+          "pulumi_provider_random_darwin_arm64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
+            "attributes": {
+              "provider_name": "random",
+              "version": "4.21.6",
+              "repository": "pulumi/pulumi-random",
+              "plugin_platform": "darwin-arm64",
+              "sha256": "f2228a848abed33e3cdd9eb14d501a2861525cfbcc81ccefd371ae642784b456"
+            }
+          },
+          "pulumi_provider_random_darwin_x64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
+            "attributes": {
+              "provider_name": "random",
+              "version": "4.21.6",
+              "repository": "pulumi/pulumi-random",
+              "plugin_platform": "darwin-amd64",
+              "sha256": "6c352166709f3539475ce61a098b0b7f152f40f830eae21fe895fd7ab3ada191"
+            }
+          },
+          "pulumi_provider_random_linux_arm64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
+            "attributes": {
+              "provider_name": "random",
+              "version": "4.21.6",
+              "repository": "pulumi/pulumi-random",
+              "plugin_platform": "linux-arm64",
+              "sha256": "ca8f2f5cb0a9e162be0fa559b90b3e35c9283df763e27c49ea78638b633984bd"
+            }
+          },
+          "pulumi_provider_random_linux_x64": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
+            "attributes": {
+              "provider_name": "random",
+              "version": "4.21.6",
+              "repository": "pulumi/pulumi-random",
+              "plugin_platform": "linux-amd64",
+              "sha256": "d23098a615cd8590e026ec3d36c95f00617d93b0af14164162b81cf1af808174"
+            }
+          },
+          "pulumi_provider_random": {
+            "repoRuleId": "@@bfreis_rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_repository",
+            "attributes": {
+              "hub_name": "pulumi_provider_random",
+              "provider_name": "random",
+              "version": "4.21.6",
+              "platform_repo_prefix": "pulumi_provider_random_"
+            }
+          }
+        }
+      }
+    },
     "@@rules_kotlin+//src/main/starlark/core/repositories:bzlmod_setup.bzl%rules_kotlin_extensions": {
       "general": {
         "bzlTransitiveDigest": "WDuVCwqV73DvcHB5Of+02lhUZgPxr9MqtpvMRyUi0eQ=",
@@ -267,102 +363,6 @@
               "urls": [
                 "https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"
               ]
-            }
-          }
-        }
-      }
-    },
-    "@@rules_pulumi+//pulumi:extensions.bzl%pulumi": {
-      "general": {
-        "bzlTransitiveDigest": "XBXYS/4mGad3U/MWo6jJtBjgxJiEvIIsyI40qEq/toc=",
-        "usagesDigest": "hPXTmPQtXKhV4eJnaCVq48kZNVyZ0EfPTQhSD/porRc=",
-        "recordedInputs": [],
-        "generatedRepoSpecs": {
-          "pulumi_cli_darwin_arm64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
-            "attributes": {
-              "version": "3.274.1",
-              "platform": "darwin-arm64",
-              "sha256": "053f2b243d09dfc2e83bacd9921f4a5d365bb8804cdc19fa09fb5a1240eb171b"
-            }
-          },
-          "pulumi_cli_darwin_x64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
-            "attributes": {
-              "version": "3.274.1",
-              "platform": "darwin-x64",
-              "sha256": "82be2e37c030737404b2ec6a5581ec76095c824c822b802a22579a95431ff376"
-            }
-          },
-          "pulumi_cli_linux_arm64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
-            "attributes": {
-              "version": "3.274.1",
-              "platform": "linux-arm64",
-              "sha256": "3deec71250f46c8f63e2b1f2078b08f5a8df4815d0e5e141420eb4e7f072f36e"
-            }
-          },
-          "pulumi_cli_linux_x64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_cli_repository",
-            "attributes": {
-              "version": "3.274.1",
-              "platform": "linux-x64",
-              "sha256": "32ae6d09d0df51637db7a0affb3ceb7d0511093b22d477aff5f20214d0b7e471"
-            }
-          },
-          "pulumi_toolchains": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_toolchains_repository",
-            "attributes": {
-              "cli_repo_prefix": "pulumi_cli_"
-            }
-          },
-          "pulumi_provider_random_darwin_arm64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
-            "attributes": {
-              "provider_name": "random",
-              "version": "4.21.6",
-              "repository": "pulumi/pulumi-random",
-              "plugin_platform": "darwin-arm64",
-              "sha256": "f2228a848abed33e3cdd9eb14d501a2861525cfbcc81ccefd371ae642784b456"
-            }
-          },
-          "pulumi_provider_random_darwin_x64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
-            "attributes": {
-              "provider_name": "random",
-              "version": "4.21.6",
-              "repository": "pulumi/pulumi-random",
-              "plugin_platform": "darwin-amd64",
-              "sha256": "6c352166709f3539475ce61a098b0b7f152f40f830eae21fe895fd7ab3ada191"
-            }
-          },
-          "pulumi_provider_random_linux_arm64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
-            "attributes": {
-              "provider_name": "random",
-              "version": "4.21.6",
-              "repository": "pulumi/pulumi-random",
-              "plugin_platform": "linux-arm64",
-              "sha256": "ca8f2f5cb0a9e162be0fa559b90b3e35c9283df763e27c49ea78638b633984bd"
-            }
-          },
-          "pulumi_provider_random_linux_x64": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_platform_repository",
-            "attributes": {
-              "provider_name": "random",
-              "version": "4.21.6",
-              "repository": "pulumi/pulumi-random",
-              "plugin_platform": "linux-amd64",
-              "sha256": "d23098a615cd8590e026ec3d36c95f00617d93b0af14164162b81cf1af808174"
-            }
-          },
-          "pulumi_provider_random": {
-            "repoRuleId": "@@rules_pulumi+//pulumi/private:repositories.bzl%pulumi_provider_repository",
-            "attributes": {
-              "hub_name": "pulumi_provider_random",
-              "provider_name": "random",
-              "version": "4.21.6",
-              "platform_repo_prefix": "pulumi_provider_random_"
             }
           }
         }

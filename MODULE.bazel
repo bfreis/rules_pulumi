@@ -1,5 +1,6 @@
 module(
-    name = "rules_pulumi",
+    name = "bfreis_rules_pulumi",
+    repo_name = "rules_pulumi",
     version = "0.0.0",
 )
 

@@ -1,8 +1,8 @@
 module(name = "rules_pulumi_integration_test")
 
-bazel_dep(name = "rules_pulumi", version = "0.0.0")
+bazel_dep(name = "bfreis_rules_pulumi", version = "0.0.0", repo_name = "rules_pulumi")
 local_path_override(
-    module_name = "rules_pulumi",
+    module_name = "bfreis_rules_pulumi",
     path = "../",
 )
 

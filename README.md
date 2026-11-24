@@ -21,12 +21,16 @@ Pulumi's own plugin downloads are switched off.
 ## Setup
 
 ```starlark
-bazel_dep(name = "rules_pulumi", version = "0.1.0")
+bazel_dep(name = "bfreis_rules_pulumi", version = "0.2.0", repo_name = "rules_pulumi")
 
 pulumi = use_extension("@rules_pulumi//pulumi:extensions.bzl", "pulumi")
 pulumi.provider(name = "aws", version = "7.21.0")
 use_repo(pulumi, "pulumi_provider_aws")
 ```
+
+The module is published to the BCR as `bfreis_rules_pulumi`; `repo_name`
+keeps its labels as `@rules_pulumi//...`, which is how every example here
+refers to it.
 
 The CLI toolchain is registered by rules_pulumi itself. To choose its version:
 
